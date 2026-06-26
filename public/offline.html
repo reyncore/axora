@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Axora — Offline</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, sans-serif;
+      background: #0f0f11;
+      color: #e8e8ec;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .container { max-width: 320px; }
+
+    .logo {
+      width: 56px; height: 56px;
+      background: #7c3aed;
+      border-radius: 16px;
+      display: flex; align-items: center; justify-content: center;
+      margin: 0 auto 24px;
+    }
+
+    .icon-wifi-off {
+      width: 48px; height: 48px;
+      margin: 0 auto 20px;
+      color: #5a5a66;
+    }
+
+    h1 {
+      font-size: 20px; font-weight: 700;
+      color: #e8e8ec; margin-bottom: 10px;
+    }
+
+    p {
+      font-size: 14px; color: #9999aa;
+      line-height: 1.6; margin-bottom: 28px;
+    }
+
+    button {
+      background: #7c3aed;
+      color: white;
+      border: none;
+      border-radius: 999px;
+      padding: 12px 28px;
+      font-size: 14px; font-weight: 600;
+      cursor: pointer;
+      transition: opacity 0.15s;
+    }
+
+    button:hover { opacity: 0.85; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <!-- Axora logo -->
+    <div class="logo" aria-hidden="true">
+      <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+        <polygon points="13,2 4.5,13.5 12,13.5 11,22 19.5,10.5 12,10.5" />
+      </svg>
+    </div>
+
+    <!-- Offline icon -->
+    <svg class="icon-wifi-off" viewBox="0 0 24 24" fill="none"
+         stroke="currentColor" stroke-width="1.5" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round"
+            d="M3 3l18 18M8.3 8.3A7.93 7.93 0 005.1 10.1M3 6.5A12.93 12.93 0 018.5 4.2
+               M12 20h.01M12 12c-1.2 0-2.3.4-3.2 1.1M12 12c1.2 0 2.3.4 3.2 1.1
+               M17 9.5a7.93 7.93 0 011.9 1.6" />
+    </svg>
+
+    <h1>Kamu sedang offline</h1>
+    <p>
+      Tidak ada koneksi internet. Periksa koneksi kamu dan coba lagi.
+      Halaman yang sudah dikunjungi sebelumnya masih bisa dibaca.
+    </p>
+
+    <button onclick="window.location.reload()">
+      Coba Lagi
+    </button>
+  </div>
+
+  <script>
+    // Auto-reload saat koneksi kembali
+    window.addEventListener('online', () => window.location.reload())
+  </script>
+</body>
+</html>
