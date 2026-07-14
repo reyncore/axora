@@ -1,0 +1,184 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /*
+   * Color tokens dalam format "R G B" (tanpa rgb(), tanpa koma)
+   * agar bisa dipakai dengan Tailwind's rgb(var(--x) / <alpha-value>) pattern.
+   *
+   * :root menyediakan fallback dark theme jika JavaScript dimatikan atau
+   * inline anti-flash script gagal jalan (CSP, dll) — <html> tanpa class
+   * apapun masih punya tampilan yang benar (dark, default Axora).
+   *
+   * .dark dan .light override :root saat class diterapkan oleh
+   * anti-flash script / ThemeProvider.
+   */
+  :root,
+  .dark {
+    --ax-bg-primary:    15 15 17;     /* #0f0f11 */
+    --ax-bg-secondary:  19 19 26;     /* #13131a */
+    --ax-bg-elevated:   26 26 34;     /* #1a1a22 */
+    --ax-bg-hover:      22 22 30;     /* #16161e */
+    --ax-bg-border:     42 42 46;     /* #2a2a2e */
+    --ax-bg-subtle:     30 30 37;     /* #1e1e25 */
+
+    --ax-text-primary:   232 232 236; /* #e8e8ec */
+    --ax-text-secondary: 153 153 170; /* #9999aa */
+    --ax-text-muted:     90 90 102;   /* #5a5a66 */
+    --ax-text-hint:      58 58 72;    /* #3a3a48 */
+
+    --ax-accent:        124 58 237;   /* #7c3aed */
+    --ax-accent-hover:  109 40 217;   /* #6d28d9 */
+    --ax-accent-light:  167 139 250;  /* #a78bfa */
+    --ax-accent-muted:  42 31 74;     /* #2a1f4a */
+
+    --ax-like:    244 114 182; /* #f472b6 */
+    --ax-repost:  52 211 153;  /* #34d399 */
+    --ax-danger:  248 113 113; /* #f87171 */
+
+    --scrollbar-thumb: #2a2a2e;
+    --scrollbar-track: transparent;
+  }
+
+  /*
+   * Light mode palette.
+   * Hierarchy tetap sama secara semantik (primary < elevated dalam "kedalaman"),
+   * tapi terang. Accent tetap ungu Axora — sedikit lebih gelap agar kontras
+   * cukup di atas background putih (WCAG AA untuk teks).
+   */
+  .light {
+    --ax-bg-primary:    255 255 255; /* #ffffff */
+    --ax-bg-secondary:  250 250 252; /* #fafafc */
+    --ax-bg-elevated:   244 244 247; /* #f4f4f7 */
+    --ax-bg-hover:      241 241 245; /* #f1f1f5 */
+    --ax-bg-border:     228 228 234; /* #e4e4ea */
+    --ax-bg-subtle:     247 247 250; /* #f7f7fa */
+
+    --ax-text-primary:   23 23 28;    /* #17171c */
+    --ax-text-secondary: 90 90 107;   /* #5a5a6b */
+    --ax-text-muted:     142 142 158; /* #8e8e9e */
+    --ax-text-hint:      196 196 207; /* #c4c4cf */
+
+    --ax-accent:        109 40 217;   /* #6d28d9 — sedikit lebih gelap untuk kontras */
+    --ax-accent-hover:  91 33 182;    /* #5b21b6 */
+    --ax-accent-light:  124 58 237;   /* #7c3aed */
+    --ax-accent-muted:  237 233 254;  /* #ede9fe */
+
+    --ax-like:    219 39 119;  /* #db2777 */
+    --ax-repost:  5 150 105;   /* #059669 */
+    --ax-danger:  220 38 38;   /* #dc2626 */
+
+    --scrollbar-thumb: #d4d4dc;
+    --scrollbar-track: transparent;
+  }
+
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+  }
+
+  *::-webkit-scrollbar        { width: 4px; }
+  *::-webkit-scrollbar-track  { background: transparent; }
+  *::-webkit-scrollbar-thumb  { background: #2a2a2e; border-radius: 2px; }
+
+  body {
+    @apply bg-ax-bg-primary text-ax-text-primary antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+
+  /* Focus ring — accessible, not distracting */
+  *:focus-visible {
+    @apply outline-none ring-2 ring-ax-accent ring-offset-2 ring-offset-ax-bg-primary;
+  }
+}
+
+/* Thin scrollbar for right panel */
+.scrollbar-thin {
+  scrollbar-width: thin;
+  scrollbar-color: var(--scrollbar-thumb) var(--scrollbar-track);
+}
+.scrollbar-thin::-webkit-scrollbar { width: 4px; }
+.scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+.scrollbar-thin::-webkit-scrollbar-thumb {
+  background: var(--scrollbar-thumb);
+  border-radius: 9999px;
+}
+
+/* Safe area for iPhone home bar */
+.pb-safe { padding-bottom: env(safe-area-inset-bottom, 8px); }
+.h-safe-bottom { height: env(safe-area-inset-bottom, 0px); }
+
+@layer components {
+  /* Reusable post action button style */
+  .ax-action-btn {
+    @apply flex items-center gap-1.5 text-ax-text-muted text-sm
+           transition-colors duration-150 cursor-pointer select-none;
+  }
+  .ax-action-btn:hover { @apply text-ax-accent-light; }
+  .ax-action-btn.liked { @apply text-ax-like; }
+  .ax-action-btn.reposted { @apply text-ax-repost; }
+
+  /* Sidebar nav item */
+  .ax-nav-item {
+    @apply flex items-center gap-3 px-3 py-2.5 rounded-ax
+           text-ax-text-muted hover:bg-ax-bg-subtle hover:text-ax-text-primary
+           transition-all duration-150 cursor-pointer w-full;
+  }
+  .ax-nav-item.active { @apply text-ax-accent-light bg-ax-accent-muted; }
+
+  /* Card surface */
+  .ax-card {
+    @apply bg-ax-bg-secondary border border-ax-bg-border rounded-ax;
+  }
+
+  /* Avatar placeholder */
+  .ax-avatar {
+    @apply rounded-full flex-shrink-0 flex items-center justify-center
+           font-medium text-white select-none;
+  }
+
+  /* Input base */
+  .ax-input {
+    @apply w-full bg-ax-bg-elevated border border-ax-bg-border rounded-ax
+           px-3.5 py-2.5 text-sm text-ax-text-primary placeholder:text-ax-text-muted
+           focus:outline-none focus:border-ax-accent focus:ring-1 focus:ring-ax-accent
+           transition-colors duration-150;
+  }
+
+  /* Primary button */
+  .ax-btn-primary {
+    @apply bg-ax-accent hover:bg-ax-accent-hover text-white font-medium
+           rounded-full px-5 py-2 text-sm transition-all duration-150
+           disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  /* Ghost button */
+  .ax-btn-ghost {
+    @apply border border-ax-bg-border hover:border-ax-accent-light text-ax-text-secondary
+           hover:text-ax-accent-light rounded-full px-4 py-1.5 text-sm
+           transition-all duration-150;
+  }
+
+  /* Skeleton shimmer */
+  .ax-skeleton {
+    @apply bg-ax-bg-subtle animate-pulse rounded;
+  }
+}
+
+@layer utilities {
+  .text-gradient-ax {
+    background: linear-gradient(135deg, #7c3aed, #a78bfa);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+/* ── Safe area untuk mobile bottom navigation ──────────────────────────────── */
+/* Mendukung iPhone notch dan Android gesture bar */
+@layer utilities {
+  .safe-area-bottom {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
+}
