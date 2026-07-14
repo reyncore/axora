@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation"
 import { signOut } from "next-auth/react"
 import {
   Home, Compass, Bell, Search, Plus, LogOut,
-  Settings, Zap, ShieldCheck, MessageSquare, Sun, Moon,
+  Settings, Zap, ShieldCheck, MessageSquare, Sun, Moon, Bookmark,
 } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { Avatar } from "@/components/ui/Avatar"
