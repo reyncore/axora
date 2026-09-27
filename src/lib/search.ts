@@ -354,15 +354,10 @@ async function getTrendingFallback(limit: number): Promise<TrendingHashtag[]> {
 
 /**
  * Refresh materialized view trending hashtags.
- * Fire-and-forget — panggil setelah post dibuat.
- * Gagal tidak crash app — view masih tampilkan data sebelumnya.
+ * Dipanggil oleh scheduled job, bukan setiap pembuatan post.
  */
 export async function refreshTrendingHashtags(): Promise<void> {
-  try {
-    await prisma.$executeRaw`
-      REFRESH MATERIALIZED VIEW CONCURRENTLY "TrendingHashtag"
-    `
-  } catch {
-    // Intentionally silent — jika view belum ada, tidak perlu error
-  }
+  await prisma.$executeRaw`
+    REFRESH MATERIALIZED VIEW CONCURRENTLY "TrendingHashtag"
+  `
 }
