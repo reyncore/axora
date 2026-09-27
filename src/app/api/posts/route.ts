@@ -4,7 +4,6 @@ import { createPostSchema } from "@/lib/validations"
 import { rateLimits, rateLimitResponse } from "@/lib/ratelimit"
 import { type Prisma } from "@prisma/client"
 import { NextRequest, NextResponse } from "next/server"
-import { refreshTrendingHashtags } from "@/lib/search"
 import type { MediaType } from "@/types"
 
 type PostCursor = {
