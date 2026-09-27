@@ -392,15 +392,6 @@ export async function POST(req: NextRequest) {
     },
   })
 
-  /*
-   * TODO:
-   * Jangan refresh materialized view pada setiap post
-   * ketika traffic sudah tinggi.
-   *
-   * Untuk sekarang behavior existing dipertahankan.
-   */
-  void refreshTrendingHashtags()
-
   return NextResponse.json(
     {
       data: {
