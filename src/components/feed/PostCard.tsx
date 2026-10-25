@@ -225,7 +225,7 @@ export function PostCard({ post, onDelete, expandedView = false }: Props) {
                     onClick={e => { e.stopPropagation(); setMenuOpen(o => !o) }}
                     className="p-1.5 rounded-ax text-ax-text-hint hover:text-ax-text-muted
                                hover:bg-ax-bg-subtle transition-all
-                               opacity-0 group-hover:opacity-100 focus:opacity-100"
+                               opacity-100 sm:opacity-0 sm:group-hover:opacity-100 focus:opacity-100"
                     aria-label="Opsi post"
                     aria-expanded={menuOpen}
                     aria-haspopup="menu"
