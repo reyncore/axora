@@ -10,8 +10,8 @@ import "./globals.css"
 export const viewport = {
   width:              "device-width",
   initialScale:       1,
-  maximumScale:       1,
-  userScalable:       false,
+  // Jangan membatasi zoom: pengguna perlu bisa memperbesar konten untuk aksesibilitas.
+
   viewportFit:        "cover",  // iPhone notch/home bar support
   themeColor:         [
     { media: "(prefers-color-scheme: dark)",  color: "#0f0f11" },
