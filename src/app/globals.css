@@ -25,8 +25,8 @@
 
     --ax-text-primary:   232 232 236; /* #e8e8ec */
     --ax-text-secondary: 153 153 170; /* #9999aa */
-    --ax-text-muted:     90 90 102;   /* #5a5a66 */
-    --ax-text-hint:      58 58 72;    /* #3a3a48 */
+    --ax-text-muted:     139 139 154; /* #8b8b9a — kontras AA pada dark surface */
+    --ax-text-hint:      139 139 154; /* #8b8b9a — hindari teks terlalu redup */
 
     --ax-accent:        124 58 237;   /* #7c3aed */
     --ax-accent-hover:  109 40 217;   /* #6d28d9 */
@@ -57,8 +57,8 @@
 
     --ax-text-primary:   23 23 28;    /* #17171c */
     --ax-text-secondary: 90 90 107;   /* #5a5a6b */
-    --ax-text-muted:     142 142 158; /* #8e8e9e */
-    --ax-text-hint:      196 196 207; /* #c4c4cf */
+    --ax-text-muted:     111 111 128; /* #6f6f80 — kontras AA pada light surface */
+    --ax-text-hint:      111 111 128; /* #6f6f80 — tetap terbaca pada light surface */
 
     --ax-accent:        109 40 217;   /* #6d28d9 — sedikit lebih gelap untuk kontras */
     --ax-accent-hover:  91 33 182;    /* #5b21b6 */
@@ -112,7 +112,7 @@
 @layer components {
   /* Reusable post action button style */
   .ax-action-btn {
-    @apply flex items-center gap-1.5 text-ax-text-muted text-sm
+    @apply flex items-center justify-center gap-1.5 min-h-[40px] text-ax-text-muted text-sm
            transition-colors duration-150 cursor-pointer select-none;
   }
   .ax-action-btn:hover { @apply text-ax-accent-light; }
