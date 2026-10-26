@@ -47,13 +47,13 @@ export function FeedContainer({ userId, sessionUser }: Props) {
   return (
     <div className="min-w-0">
       {/* Feed masthead: hierarki editorial yang ringkas, bukan dashboard card. */}
-      <header className="px-4 sm:px-5 pt-5 pb-3 border-b border-ax-bg-border">
+      <header className="px-3 sm:px-5 pt-3 sm:pt-5 pb-3 border-b border-ax-bg-border">
         <div className="flex items-center justify-between gap-3">
           <div className="min-w-0">
             <p className="font-mono text-[10px] tracking-[0.18em] uppercase text-ax-text-muted">
               Axora <span aria-hidden="true">/</span> Ruang publik
             </p>
-            <h1 className="mt-1 text-2xl sm:text-[28px] leading-tight font-bold tracking-tight text-ax-text-primary">
+            <h1 className="mt-1 text-[23px] sm:text-[28px] leading-tight font-bold tracking-tight text-ax-text-primary">
               Beranda<span className="text-ax-accent-light">.</span>
             </h1>
           </div>
@@ -101,7 +101,7 @@ export function FeedContainer({ userId, sessionUser }: Props) {
       </div>
 
       {/* Composer dipisahkan dari masthead agar alur baca lebih terstruktur. */}
-      <section aria-label="Buat post" className="border-b border-ax-bg-border">
+      <section aria-label="Buat post" className="min-w-0">
         <CreatePostBox user={sessionUser} onPostCreated={handlePostCreated} />
       </section>
 
