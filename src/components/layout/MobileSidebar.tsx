@@ -57,7 +57,7 @@ export function MobileSidebar({ user }: Props) {
       <nav
         className="lg:hidden fixed bottom-0 left-0 right-0 z-40
                    bg-ax-bg-primary/95 backdrop-blur-md
-                   border-t border-ax-bg-border"
+                   border-t border-ax-bg-border pb-safe"
         aria-label="Navigasi mobile"
       >
         <div className="flex items-center h-14">
