@@ -321,7 +321,7 @@ export function PostCard({ post, onDelete, expandedView = false }: Props) {
 
         {/* Action bar — expanded view dapat label text + lebih lega */}
         <div className={cn(
-          "flex items-center border-t border-ax-bg-border",
+          "flex items-center",
           expandedView ? "px-2 py-1" : "px-2 sm:px-3 py-1",
         )}>
           <Link
