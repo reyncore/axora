@@ -112,7 +112,7 @@
 @layer components {
   /* Reusable post action button style */
   .ax-action-btn {
-    @apply flex items-center justify-center gap-1.5 min-h-[40px] text-ax-text-muted text-sm
+    @apply flex items-center justify-center gap-1.5 min-h-[44px] text-ax-text-muted text-sm
            transition-colors duration-150 cursor-pointer select-none;
   }
   .ax-action-btn:hover { @apply text-ax-accent-light; }
