@@ -163,7 +163,7 @@ export function PostCard({ post, onDelete, expandedView = false }: Props) {
         !expandedView && "border-b border-ax-bg-border hover:bg-ax-bg-hover",
         deleting && "opacity-50 pointer-events-none",
       )}>
-        <div className={cn("flex gap-3", expandedView ? "p-4 pb-2" : "px-4 pt-3 pb-1")}>
+        <div className={cn("flex gap-2.5 sm:gap-3", expandedView ? "p-4 pb-2" : "px-3 sm:px-4 pt-3 pb-1")}>
 
           {/* Avatar */}
           <Link
@@ -322,7 +322,7 @@ export function PostCard({ post, onDelete, expandedView = false }: Props) {
         {/* Action bar — expanded view dapat label text + lebih lega */}
         <div className={cn(
           "flex items-center border-t border-ax-bg-border",
-          expandedView ? "px-2 py-1" : "px-3 py-1",
+          expandedView ? "px-2 py-1" : "px-2 sm:px-3 py-1",
         )}>
           <Link
             href={`/posts/${post.id}`}
