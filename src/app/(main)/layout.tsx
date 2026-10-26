@@ -37,7 +37,7 @@ export default async function MainLayout({ children }: { children: React.ReactNo
         {/* Main content */}
         <main
           className="flex-1 min-w-0 border-r border-ax-bg-border
-                     pb-16 lg:pb-0"
+                     pb-20 lg:pb-0"
         >
           {showVerificationBanner && (
             <EmailVerificationBanner email={userMeta.email} />
