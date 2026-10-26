@@ -113,7 +113,7 @@ export function CreatePostBox({ user, onPostCreated }: Props) {
 
   return (
     <div className="border-b border-ax-bg-border bg-ax-bg-primary">
-      <div className="px-4 pt-3 pb-2 flex gap-3">
+      <div className="px-3 sm:px-4 pt-3 pb-2 flex gap-2.5 sm:gap-3">
         <Avatar
           name={user.name ?? user.username}
           src={user.image}
@@ -169,7 +169,7 @@ export function CreatePostBox({ user, onPostCreated }: Props) {
                   onClick={() => fileInputRef.current?.click()}
                   disabled={images.length >= MAX_IMAGES}
                   className={cn(
-                    "p-2 rounded-ax transition-colors",
+                    "flex min-w-10 min-h-10 items-center justify-center p-2 rounded-ax transition-colors",
                     images.length >= MAX_IMAGES
                       ? "text-ax-text-hint cursor-not-allowed"
                       : "text-ax-accent-light hover:bg-ax-accent-muted"
@@ -180,7 +180,7 @@ export function CreatePostBox({ user, onPostCreated }: Props) {
                 </button>
                 <button
                   type="button"
-                  className="p-2 rounded-ax text-ax-accent-light hover:bg-ax-accent-muted transition-colors"
+                  className="flex min-w-10 min-h-10 items-center justify-center p-2 rounded-ax text-ax-accent-light hover:bg-ax-accent-muted transition-colors"
                   aria-label="Tambah emoji"
                 >
                   <Smile size={18} aria-hidden="true" />
