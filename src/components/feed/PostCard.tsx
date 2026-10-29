@@ -142,11 +142,37 @@ export function PostCard({ post, onDelete, expandedView = false }: Props) {
 
   async function copyLink() {
     const url = `${window.location.origin}/posts/${post.id}`
+    const title = `Post dari ${post.author.displayName} di Axora`
+
     try {
-      await navigator.clipboard.writeText(url)
-      toast.success("Link disalin!")
-    } catch {
-      toast.error("Gagal menyalin link")
+      // Gunakan native share sheet di perangkat yang mendukungnya.
+      if (typeof navigator.share === "function") {
+        await navigator.share({ title, url })
+        return
+      }
+
+      // Fallback untuk browser tanpa Web Share API.
+      if (navigator.clipboard?.writeText && window.isSecureContext) {
+        await navigator.clipboard.writeText(url)
+        toast.success("Link disalin!")
+        return
+      }
+
+      // Fallback terakhir: tampilkan URL agar tetap bisa disalin manual.
+      window.prompt("Salin link post ini:", url)
+    } catch (error) {
+      // Membatalkan native share bukan error bagi pengguna.
+      if (error instanceof Error && error.name === "AbortError") return
+      try {
+        if (navigator.clipboard?.writeText && window.isSecureContext) {
+          await navigator.clipboard.writeText(url)
+          toast.success("Link disalin!")
+          return
+        }
+      } catch {
+        // Gunakan fallback manual di bawah.
+      }
+      window.prompt("Salin link post ini:", url)
     }
   }
 
@@ -377,7 +403,7 @@ export function PostCard({ post, onDelete, expandedView = false }: Props) {
           </button>
 
           {post.currentUserId && (
-            <div onClick={e => e.stopPropagation()}>
+            <div className="flex flex-1 min-w-0" onClick={e => e.stopPropagation()}>
               <BookmarkButton
                 postId={post.id}
                 initialBookmarked={post.isBookmarked ?? false}
