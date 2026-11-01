@@ -16,6 +16,7 @@ export const dynamic = "force-dynamic"
 
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { getBatchBookmarkStatus } from "@/lib/bookmarks"
 import { NextRequest, NextResponse } from "next/server"
 import type { MediaType } from "@/types"
 
@@ -94,9 +95,16 @@ export async function GET(req: NextRequest) {
 
   const pageItems = scored.slice(start, start + limit)
   const hasMore   = scored.length > start + limit
+  const bookmarkStatus = await getBatchBookmarkStatus(
+    session.user.id,
+    pageItems.map((item) => item.data.id)
+  )
 
   return NextResponse.json({
-    data: pageItems.map(s => s.data),
+    data: pageItems.map(({ data }) => ({
+      ...data,
+      isBookmarked: bookmarkStatus.get(data.id) ?? false,
+    })),
     meta: {
       page,
       hasMore,
