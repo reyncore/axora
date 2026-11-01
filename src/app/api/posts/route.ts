@@ -1,5 +1,6 @@
 import { auth } from "@/lib/auth"
 import { prisma } from "@/lib/prisma"
+import { getBatchBookmarkStatus } from "@/lib/bookmarks"
 import { createPostSchema } from "@/lib/validations"
 import { rateLimits, rateLimitResponse } from "@/lib/ratelimit"
 import { type Prisma } from "@prisma/client"
@@ -236,6 +237,10 @@ export async function GET(req: NextRequest) {
     : posts
 
   const lastItem = items[items.length - 1]
+  const bookmarkStatus = await getBatchBookmarkStatus(
+    session.user.id,
+    items.map((post) => post.id)
+  )
 
   const nextCursor =
     hasMore && lastItem
@@ -258,6 +263,7 @@ export async function GET(req: NextRequest) {
       })),
 
       isLiked: likes.length > 0,
+      isBookmarked: bookmarkStatus.get(post.id) ?? false,
       likesCount: _count.likes,
       commentsCount: _count.comments,
     })),
